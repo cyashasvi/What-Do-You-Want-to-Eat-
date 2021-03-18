@@ -1,3 +1,18 @@
-/* body {
-    background-image: url("https://keralaspicecart.com/wp-content/uploads/2020/10/samispices-home-02.jpg");
-} */
+
+body {
+    background-image: url("https://ochsner-craft.s3.amazonaws.com/blog/articles/_930x524_crop_center-center_75_none/Spices-with-spoons.jpg");
+  
+    height: 100vh;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    width: auto;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    margin-top: 25vh;
+}
+
