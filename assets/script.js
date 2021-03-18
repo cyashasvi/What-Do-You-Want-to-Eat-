@@ -18,7 +18,7 @@ function getRecipesByList(list) {
 
 function getRecipeDetail(recipe_id) {
     return new Promise((resolve) => {
-        fetch("https://tasty.p.rapidapi.com/recipes/detail?id=5586", {
+        fetch(`https://tasty.p.rapidapi.com/recipes/detail?id=${recipie_id}`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
