@@ -1,3 +1,56 @@
+var apiKey = "FlqWwYqJzXaWUWn3V-cYinMrcKlu855-57HIftCbVrLLG5uXvoo89kw7jDbW6GhyiOhrghGq72yWbS4En9ZTDWnBzqct_d6PLFhI9Jp_U4xTrFAF3vFdd43hobRSYHYx";
+var yelpID = "ILScKjvBUWM78H9UUR3uxA"
+
+
+var dineInBtn = document.getElementById('dine-in')
+var dineOutBtn = document.getElementById('dine-out')
+var saveBtn = document.getElementById('save-btn')
+var cancelBtn = document.getElementById('cancel-btn')
+var changeToDineIn = document.getElementById('change-to-dine-in')
+var changeToDineOut = document.getElementById('change-to-dine-out')
+var cardContent = document.getElementById('dine-in-out')
+var surveyTitle = document.getElementById('survey-title')
+var recipePage = document.getElementById('recipe-page')
+var recipePageBtn = document.getElementById('recipe-page-btn')
+
+dineInBtn.addEventListener('click', startSurveyIn)
+dineOutBtn.addEventListener('click', startSurveyOut)
+saveBtn.addEventListener('click', saveSurvey)
+cancelBtn.addEventListener('click', cancelSurvey)
+changeToDineIn.addEventListener('click', startSurveyIn)
+changeToDineOut.addEventListener('click', startSurveyOut)
+recipePageBtn.addEventListener('click', showRecipePage)
+
+function startSurveyIn() {
+    cardContent.classList.add('hide')
+        $('.modal').addClass('is-active')
+        surveyTitle.innerHTML = "Dining in is a great choice!"
+        recipePage.classList.add('hide')
+    }
+
+function startSurveyOut() {
+        cardContent.classList.add('hide')
+            $('.modal').addClass('is-active')
+            surveyTitle.innerHTML = "Dining out looks like you wont have dishes to do!";
+            recipePage.classList.add('hide')
+        }
+
+function cancelSurvey() {
+    cardContent.classList.remove('hide')
+    $(".modal").removeClass('is-active')
+     }
+    
+function saveSurvey() {
+     $(".modal").removeClass('is-active')
+         }
+
+ function showRecipePage() {
+     cardContent.classList.add('hide')
+     recipePage.classList.remove('hide')
+ }
+
+
+
 function getRecipesByList(list) {
     return new Promise((resolve) => {
         fetch(`https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=${list}`, {
@@ -70,14 +123,14 @@ getLists().then(lists => {
 
 // document.querySelector('.card').innerHTML = '';
 
-function italianGroup() {
+//  function italianGroup() {
 
-  var italianFood = document.createElement('p');
-  italianFood.textContent = "sad";
+//    var italianFood = document.createElement('p');
+//   italianFood.textContent = "sad";
 
-  document.querySelector('.card').appendChild(italianFood);
+//   document.querySelector('.card').appendChild(italianFood);
 
-}
+//  }
   
-document.getElementById('italian').addEventListener('click', italianGroup);
+//  document.getElementById('italian').addEventListener('click', italianGroup);
 
