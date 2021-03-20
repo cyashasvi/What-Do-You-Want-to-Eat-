@@ -19,3 +19,26 @@ section {
 .card {
     
 }
+
+/* Eddie - Setup the hide class so we can utilize it later in the script to hide cards 
+also added in a hover effect and bolded the font */
+
+.hide {
+    display: none;
+}
+
+
+.content {
+    font-weight: bolder;
+}
+
+
+button#dine-in:hover {
+    background-color: #5537ff;
+    color: #f8f8f8;
+}
+
+button#dine-out:hover {
+    background-color: #5537ff;
+    color: #f8f8f8;
+}
