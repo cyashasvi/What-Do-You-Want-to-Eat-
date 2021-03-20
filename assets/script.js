@@ -56,7 +56,7 @@ window.addEventListener("load", function () {
 
     document.querySelector(".recipes").addEventListener("click", function (e) {
         e.preventDefault();
-        var all = document.querySelector("#all").value;
+        var list = document.querySelector(".recipes").value;
         // var searchValue = document.querySelector(".city-input").value;
         if (searchCity) {
             getRecipesByList(list);
