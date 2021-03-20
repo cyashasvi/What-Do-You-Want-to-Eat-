@@ -71,7 +71,7 @@ function getRecipesByList(list) {
 
 function getRecipeDetail(recipe_id) {
     return new Promise((resolve) => {
-        fetch(`https://tasty.p.rapidapi.com/recipes/detail?id=${recipie_id}`, {
+        fetch(`https://tasty.p.rapidapi.com/recipes/detail?id=${recipe_id}`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
@@ -97,14 +97,18 @@ function getLists() {
         })
             .then(response => response.json())
             .then(response => {
+                console.log(response)
                 resolve(response)
+                var recipe_id = response.results[0].id
+                console.log(recipe_id);
+                getRecipeDetail(recipe_id);
             })
             .catch(err => {
                 console.error(err);
             });
     })
 }
-
+getLists();
 /* 
 getLists().then(lists => {
     console.log("the lists are", lists)
