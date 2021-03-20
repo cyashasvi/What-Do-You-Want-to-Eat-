@@ -1,3 +1,4 @@
+window.addEventListener("load", function () {
 var apiKey = "FlqWwYqJzXaWUWn3V-cYinMrcKlu855-57HIftCbVrLLG5uXvoo89kw7jDbW6GhyiOhrghGq72yWbS4En9ZTDWnBzqct_d6PLFhI9Jp_U4xTrFAF3vFdd43hobRSYHYx";
 var yelpID = "ILScKjvBUWM78H9UUR3uxA"
 
@@ -50,82 +51,89 @@ function saveSurvey() {
  }
 
 
-
-function getRecipesByList(list) {
-    return new Promise((resolve) => {
-        fetch(`https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=${list}`, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
-                "x-rapidapi-host": "tasty.p.rapidapi.com"
-            }
-        })
-            .then(response => response.json())
-            .then(response => resolve(response))
-            .catch(err => {
-                console.error(err);
-            });
-
-    })
-}
-
-function getRecipeDetail(recipe_id) {
-    return new Promise((resolve) => {
-        fetch(`https://tasty.p.rapidapi.com/recipes/detail?id=${recipe_id}`, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
-                "x-rapidapi-host": "tasty.p.rapidapi.com"
-            }
-        })
-            .then(response => response.json())
-            .then(response => resolve(response))
-            .catch(err => {
-                console.error(err);
-            });
-    })
-}
-
-function getLists() {
-    return new Promise((resolve) => {
-        fetch("https://tasty.p.rapidapi.com/tags/list", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
-                "x-rapidapi-host": "tasty.p.rapidapi.com"
-            }
-        })
-            .then(response => response.json())
-            .then(response => {
-                console.log(response)
-                resolve(response)
-                var recipe_id = response.results[0].id
-                console.log(recipe_id);
-                getRecipeDetail(recipe_id);
+    function getRecipesByList(list) {
+        return new Promise((resolve) => {
+            fetch(`https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=${list}`, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
+                    "x-rapidapi-host": "tasty.p.rapidapi.com"
+                }
             })
-            .catch(err => {
-                console.error(err);
-            });
+                .then(response => response.json())
+                .then(response => resolve(response))
+                .catch(err => {
+                    console.error(err);
+                });
+
+        })
+    }
+
+    function getRecipeDetail(recipe_id) {
+        return new Promise((resolve) => {
+            fetch(`https://tasty.p.rapidapi.com/recipes/detail?id=${recipie_id}`, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
+                    "x-rapidapi-host": "tasty.p.rapidapi.com"
+                }
+            })
+                .then(response => response.json())
+                .then(response => resolve(response))
+                .catch(err => {
+                    console.error(err);
+                });
+        })
+    }
+
+    function getLists() {
+        return new Promise((resolve) => {
+            fetch("https://tasty.p.rapidapi.com/tags/list", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
+                    "x-rapidapi-host": "tasty.p.rapidapi.com"
+                }
+            })
+                .then(response => response.json())
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        })
+    }
+
+    document.querySelector(".recipes").addEventListener("click", function (e) {
+        e.preventDefault();
+        var all = document.querySelector("#all").value;
+        // var searchValue = document.querySelector(".city-input").value;
+        if (searchCity) {
+            getRecipesByList(list);
+            // getForecast(searchValue);
+            document.querySelector(".recipes").value = "";
+        }
     })
-}
-getLists();
+  
 /* 
 getLists().then(lists => {
     console.log("the lists are", lists)
 
-    // for each list OR for a single list, 
-    getRecipesByList(single_list_goes_here).then( recipes => {
-        console.log(recipes)
-        // for each reicpe, we can get recipe details 
-        getRecipeDetail(recipe_id).then( details => {
-            // list the individual recipe details by id 
-            console.log(details)
+        // for each list OR for a single list, 
+        getRecipesByList(single_list_goes_here).then( recipes => {
+            console.log(recipes)
+            // for each reicpe, we can get recipe details 
+            getRecipeDetail(recipe_id).then( details => {
+                // list the individual recipe details by id 
+                console.log(details)
+            })
         })
-    })
 
-}) */
+    }) */
 
-// document.querySelector('.card').innerHTML = '';
+    // document.querySelector('.card').innerHTML = '';
+
 
 //  function italianGroup() {
 
@@ -138,3 +146,4 @@ getLists().then(lists => {
   
 //  document.getElementById('italian').addEventListener('click', italianGroup);
 
+})
