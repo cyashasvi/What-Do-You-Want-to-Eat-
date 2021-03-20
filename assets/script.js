@@ -128,10 +128,10 @@ window.addEventListener("load", function () {
     function generateCardTemplate(recipe) {
         const { thumbnail_url, name, cook_time_minutes, description, original_video_url } = recipe
 
-        let html = `<section id="recipe-page">
-        <div class="container ">
-            <div class="column-gap is-multiline is-vcentered">
-                <div class="card column is-12 is-multiline is-vcentered">
+        let html = `
+       
+            
+                <div class="card mx-4">
                     <div class="card-image">
                         <figure class="image is-4by3">
                             <img src="${thumbnail_url}" alt="Placeholder image">
@@ -145,7 +145,7 @@ window.addEventListener("load", function () {
                             </div>
                         </div>
                         <div class="content">
-                            <p id='recipe-detail-1'>${description}</p>
+                            <p id='recipe-detail-1'>${description || "Try this fun recipe out for yourself! Click the button below to start the fun!"}</p>
                             <br>
                             <footer class="card-footer">
                                 <a id="view-recipe" class="button" href="${original_video_url}" >View Recipe</a>
@@ -153,9 +153,9 @@ window.addEventListener("load", function () {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>`
+           
+        
+    `
 
         var template = document.createElement('template');
         html = html.trim(); // Never return a text node of whitespace as the result
