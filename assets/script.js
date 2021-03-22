@@ -206,7 +206,7 @@ window.addEventListener("load", function () {
         })
     })
 
-function restaurant() {
+function restaurant(list) {
     fetch("https://api.documenu.com/v2/restaurants/zip_code/92618?size=5", {
         "method": "GET",
         "headers": {
@@ -226,6 +226,67 @@ function restaurant() {
     });
 }
 restaurant();
+
+function generateCardTemplate(restaurant) {
+    const { restaurant_name, restaurant_phone, restaurant_website } = restaurant
+    
+
+    let html = `
+        
+            <div class="card mx-4">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4">${restaurant_name}</p>
+                            <p class="subtitle is-6"> ${restaurant_phone}</p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p id='recipe-detail-1'>${restaurant_website}</p>
+                    </div>
+                </div>
+            </div>
+       
+    
+`
+
+    var template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
+
+function clearRestaurantList() {
+    let parent = document.getElementById("restaurant-page")
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild)
+    }
+}
+
+
+
+document.querySelectorAll('.restaurants').forEach(function (restaurant) {
+
+    restaurant.addEventListener("click", function (e) {
+
+        e.preventDefault()
+        let list = e.target.id
+        if (address.city == list) {
+            return
+        }
+        address.city = list
+        // before we generate html lets us empty the apge 
+        clearRestaurantList()
+
+        restaurant(list).then(function (response) {
+            console.log(response);
+            response.results.map(restaurant => {
+                let card = generateCardTemplate(restaurant)
+                document.getElementById("restaurant-page").append(card)
+            })
+        })
+    })
+})
 
 
 
