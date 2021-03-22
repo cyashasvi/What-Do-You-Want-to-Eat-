@@ -225,7 +225,7 @@ function restaurant(list) {
         console.error(err);
     });
 }
-// restaurant();
+restaurant();
 
 function generateCardTemplate(restaurant) {
     const { restaurant_name, restaurant_phone, restaurant_website } = restaurant
