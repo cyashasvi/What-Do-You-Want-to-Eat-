@@ -74,7 +74,6 @@ window.addEventListener("load", function () {
     }
 
            
-    }
 
     //     document.querySelectorAll('american').forEach(function (recipe) {
     //         recipe.addEventListener("click", function (e) {
