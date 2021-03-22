@@ -130,7 +130,6 @@ window.addEventListener("load", function () {
         
 
         let html = `
-       
             
                 <div class="card mx-4">
                     <div class="card-image">
