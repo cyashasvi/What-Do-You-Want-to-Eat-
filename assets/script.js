@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
 
     // ideally this should be a global vairable 
     var cuisine = null
-
+    var address = null
     var dineInBtn = document.getElementById('dine-in')
     var dineOutBtn = document.getElementById('dine-out')
     var saveBtn = document.getElementById('save-btn')
@@ -17,8 +17,8 @@ window.addEventListener("load", function () {
     var recipePage = document.getElementById('recipe-page')
     var recipePageBtn = document.getElementById('recipe-page-btn')
     var foodTypes = document.getElementById('foodTypes')
-    var resturantPage = document.getElementById('resturant-page')
-    var resturantPageBtn = document.getElementById('resturant-page-btn')
+    var restaurantPage = document.getElementById('restaurant-page')
+    var restaurantPageBtn = document.getElementById('restaurant-page-btn')
 
 
     dineInBtn.addEventListener('click', startSurveyIn)
@@ -28,13 +28,14 @@ window.addEventListener("load", function () {
     changeToDineIn.addEventListener('click', startSurveyIn)
     changeToDineOut.addEventListener('click', startSurveyOut)
     recipePageBtn.addEventListener('click', showRecipePage)
-    resturantPageBtn.addEventListener('click', showResturantPage)
+    restaurantPageBtn.addEventListener('click', showRestaurantPage)
 
     function startSurveyIn() {
         cardContent.classList.add('hide')
         $('.modal').addClass('is-active')
         surveyTitle.innerHTML = "Dining in is a great choice!"
         recipePage.classList.add('hide')
+        clearRecipleList();
     }
 
     function startSurveyOut() {
@@ -42,6 +43,7 @@ window.addEventListener("load", function () {
         $('.modal').addClass('is-active')
         surveyTitle.innerHTML = "Dining out looks like you wont have dishes to do!";
         recipePage.classList.add('hide')
+        clearRecipleList();
     }
 
     function cancelSurvey() {
@@ -58,13 +60,17 @@ window.addEventListener("load", function () {
         recipePage.classList.remove('hide')
         foodTypes.classList.remove('hide')
         document.getElementById('american').click()
+        restaurantPage.classList.add('hide')
     }
 
-    function showResturantPage() {
+    function showRestaurantPage() {
             cardContent.classList.add('hide')
             recipePage.classList.add('hide')
             foodTypes.classList.add('hide')
-            resturantPage.classList.remove('hide')
+            restaurantPage.classList.remove('hide')
+            clearRecipleList();
+      
+            
     }
 
         //     document.querySelectorAll('american').forEach(function (recipe) {
@@ -99,6 +105,7 @@ window.addEventListener("load", function () {
 
         })
     }
+
 
     // function getRecipeDetail(recipe_id) {
     //     return new Promise((resolve) => {
@@ -135,6 +142,7 @@ window.addEventListener("load", function () {
     //             });
     //     })
     // }
+
 
     function generateCardTemplate(recipe) {
         const { thumbnail_url, name, cook_time_minutes, description, original_video_url } = recipe
@@ -175,7 +183,7 @@ window.addEventListener("load", function () {
     }
 
     function clearRecipleList() {
-        let parent = document.getElementById("recipe-page")
+        let parent = document.getElementById('recipe-page')
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild)
         }
@@ -206,8 +214,8 @@ window.addEventListener("load", function () {
         })
     })
 
-function restaurant(list) {
-    fetch("https://api.documenu.com/v2/restaurants/zip_code/92618?size=5", {
+function restaurant(zip_code) {
+    fetch("https://api.documenu.com/v2/restaurants=${zip_code}/92618?size=5", {
         "method": "GET",
         "headers": {
             "x-api-key": "481cdd6ceda2a590c083bb3daddbd066",
@@ -225,9 +233,10 @@ function restaurant(list) {
         console.error(err);
     });
 }
-restaurant();
 
-function generateCardTemplate(restaurant) {
+restaurant()
+
+function generateCardTemplateResturant(restaurant) {
     const { restaurant_name, restaurant_phone, restaurant_website } = restaurant
     
 
@@ -271,22 +280,24 @@ document.querySelectorAll('.restaurants').forEach(function (restaurant) {
 
         e.preventDefault()
         let list = e.target.id
-        if (address.city == list) {
+        if (address == list) {
             return
         }
-        address.city = list
-        // before we generate html lets us empty the apge 
+        address = list
+        // before we generate html lets us empty the page 
         clearRestaurantList()
 
         restaurant(list).then(function (response) {
             console.log(response);
             response.results.map(restaurant => {
-                let card = generateCardTemplate(restaurant)
-                document.getElementById("restaurant-page").append(card)
+                let card = generateCardTemplateResturant(restaurant)
+                document.getElementById("recipe-page").append(card)
             })
         })
     })
 })
+
+
 
 
 
@@ -333,4 +344,4 @@ document.querySelectorAll('.restaurants').forEach(function (restaurant) {
 
     //  document.getElementById('italian').addEventListener('click', italianGroup);
 
-})
+ })
