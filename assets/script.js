@@ -58,22 +58,21 @@ window.addEventListener("load", function () {
         cardContent.classList.add('hide')
         recipePage.classList.remove('hide')
         foodTypes.classList.remove('hide')
-        resturantPage.classList.add('hide')
+        restaurantPage.classList.add('hide')
         document.getElementById('american').click()
         clearRecipleList()
     }
 
-    function showResturantPage() {
+    function showRestaurantPage() {
         cardContent.classList.add('hide')
         recipePage.classList.add('hide')
         foodTypes.classList.add('hide')
-        resturantPage.classList.remove('hide')
+        restaurantPage.classList.remove('hide')
         document.getElementById('92806').click()
         clearRecipleList()
-        restaurantPage.classList.add('hide')
     }
 
-           
+        
 
     //     document.querySelectorAll('american').forEach(function (recipe) {
     //         recipe.addEventListener("click", function (e) {
@@ -247,7 +246,6 @@ window.addEventListener("load", function () {
 
 }
 
-    }
 
     function generateRestCard(restaurant) {
         const { restaurant_name, restaurant_phone, restaurant_website, price_range } = restaurant
@@ -259,17 +257,13 @@ window.addEventListener("load", function () {
                 <div class="card-content">
                     <div class="media">
                         <div class="media-content">
-
                             <p class="title is-4">${restaurant_name}</p>
                             <p class="subtitle is-6"> ${price_range || "$"}</p>
                             <p class="subtitle is-6"> ${restaurant_phone}</p>
-                            <p class="title is-4">${restaurant_name || "What's up!"}</p>
-                            <p class="subtitle is-6"> ${restaurant_phone || "What's up!"}</p>
-
                         </div>
                     </div>
                     <div class="content">
-                        <p id='recipe-detail-1'>${restaurant_website || "What's up!"}</p>
+                        <p id='recipe-detail-1'>${restaurant_website}</p>
                     </div>
                 </div>
             </div>
@@ -343,14 +337,7 @@ window.addEventListener("load", function () {
         }
         address = list
         // before we generate html lets us empty the page 
-        clearRestaurantList()
-
-        restaurant(list).then(function (response) {
-            console.log(response);
-            response.results.map(restaurant => {
-                let card = generateCardTemplateResturant(restaurant)
-                document.getElementById("restaurant-page").append(card)
-
+        restaurantPage()
             })
         })
     })
