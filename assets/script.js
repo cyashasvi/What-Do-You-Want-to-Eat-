@@ -195,7 +195,26 @@ window.addEventListener("load", function () {
         })
     })
 
-
+function restaurant() {
+    fetch("https://api.documenu.com/v2/restaurants/zip_code/92618?size=5", {
+        "method": "GET",
+        "headers": {
+            "x-api-key": "481cdd6ceda2a590c083bb3daddbd066",
+            "x-rapidapi-key": "edad40ff31msh277b41d1a9321c3p120a05jsnf0693eb77a08",
+            "x-rapidapi-host": "documenu.p.rapidapi.com"
+        }
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        console.log(data)
+    })
+    .catch(err => {
+        console.error(err);
+    });
+}
+restaurant();
 
 
 
