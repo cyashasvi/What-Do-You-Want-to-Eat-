@@ -17,6 +17,9 @@ window.addEventListener("load", function () {
     var recipePage = document.getElementById('recipe-page')
     var recipePageBtn = document.getElementById('recipe-page-btn')
     var foodTypes = document.getElementById('foodTypes')
+    var resturantPage = document.getElementById('resturant-page')
+    var resturantPageBtn = document.getElementById('resturant-page-btn')
+
 
     dineInBtn.addEventListener('click', startSurveyIn)
     dineOutBtn.addEventListener('click', startSurveyOut)
@@ -25,6 +28,7 @@ window.addEventListener("load", function () {
     changeToDineIn.addEventListener('click', startSurveyIn)
     changeToDineOut.addEventListener('click', startSurveyOut)
     recipePageBtn.addEventListener('click', showRecipePage)
+    resturantPageBtn.addEventListener('click', showResturantPage)
 
     function startSurveyIn() {
         cardContent.classList.add('hide')
@@ -54,7 +58,14 @@ window.addEventListener("load", function () {
         recipePage.classList.remove('hide')
         foodTypes.classList.remove('hide')
         document.getElementById('american').click()
+    }
 
+    function showResturantPage() {
+            cardContent.classList.add('hide')
+            recipePage.classList.add('hide')
+            foodTypes.classList.add('hide')
+            resturantPage.classList.remove('hide')
+    }
 
         //     document.querySelectorAll('american').forEach(function (recipe) {
         //         recipe.addEventListener("click", function (e) {
@@ -68,7 +79,7 @@ window.addEventListener("load", function () {
         //             })
         //         })
         //     })
-    }
+
 
 
     function getRecipesByList(list) {
