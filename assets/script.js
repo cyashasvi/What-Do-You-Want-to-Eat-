@@ -3,8 +3,8 @@ window.addEventListener("load", function () {
     var apiKey = "FlqWwYqJzXaWUWn3V-cYinMrcKlu855-57HIftCbVrLLG5uXvoo89kw7jDbW6GhyiOhrghGq72yWbS4En9ZTDWnBzqct_d6PLFhI9Jp_U4xTrFAF3vFdd43hobRSYHYx";
     var yelpID = "ILScKjvBUWM78H9UUR3uxA"
 
-   // ideally this should be a global vairable 
-   var cuisine = null
+    // ideally this should be a global vairable 
+    var cuisine = null
 
     var dineInBtn = document.getElementById('dine-in')
     var dineOutBtn = document.getElementById('dine-out')
@@ -56,18 +56,18 @@ window.addEventListener("load", function () {
         document.getElementById('american').click()
 
 
-    //     document.querySelectorAll('american').forEach(function (recipe) {
-    //         recipe.addEventListener("click", function (e) {
-    //             e.preventDefault()
-    //             let list = e.target.id
-    //             getRecipesByList(list).then(function (response) {
-    //                 response.results.map(recipe => {
-    //                     let card = generateCardTemplate(recipe)
-    //                     document.getElementById("recipe-page").append(card)
-    //                 })
-    //             })
-    //         })
-    //     })
+        //     document.querySelectorAll('american').forEach(function (recipe) {
+        //         recipe.addEventListener("click", function (e) {
+        //             e.preventDefault()
+        //             let list = e.target.id
+        //             getRecipesByList(list).then(function (response) {
+        //                 response.results.map(recipe => {
+        //                     let card = generateCardTemplate(recipe)
+        //                     document.getElementById("recipe-page").append(card)
+        //                 })
+        //             })
+        //         })
+        //     })
     }
 
 
@@ -127,6 +127,7 @@ window.addEventListener("load", function () {
 
     function generateCardTemplate(recipe) {
         const { thumbnail_url, name, cook_time_minutes, description, original_video_url } = recipe
+        
 
         let html = `
        
@@ -163,14 +164,14 @@ window.addEventListener("load", function () {
         return template.content.firstChild;
     }
 
-    function clearRecipleList(){
+    function clearRecipleList() {
         let parent = document.getElementById("recipe-page")
-        while(parent.firstChild) {
+        while (parent.firstChild) {
             parent.removeChild(parent.firstChild)
         }
     }
 
- 
+
 
     document.querySelectorAll('.recipes').forEach(function (recipe) {
 
@@ -178,8 +179,8 @@ window.addEventListener("load", function () {
 
             e.preventDefault()
             let list = e.target.id
-            if(cuisine == list) {
-                return 
+            if (cuisine == list) {
+                return
             }
             cuisine = list
             // before we generate html lets us empty the apge 
