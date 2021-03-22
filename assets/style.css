@@ -17,7 +17,7 @@ section {
 }
 
 .card {
-    
+    max-width: 40%;
 }
 
 /* Eddie - Setup the hide class so we can utilize it later in the script to hide cards 
