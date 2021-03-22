@@ -1,8 +1,5 @@
 window.addEventListener("load", function () {
 
-    var apiKey = "FlqWwYqJzXaWUWn3V-cYinMrcKlu855-57HIftCbVrLLG5uXvoo89kw7jDbW6GhyiOhrghGq72yWbS4En9ZTDWnBzqct_d6PLFhI9Jp_U4xTrFAF3vFdd43hobRSYHYx";
-    var yelpID = "ILScKjvBUWM78H9UUR3uxA"
-
     // ideally this should be a global vairable 
     var cuisine = null
     var address = null
@@ -215,23 +212,23 @@ window.addEventListener("load", function () {
     })
 
 function restaurant(zip_code) {
-    fetch("https://api.documenu.com/v2/restaurants=${zip_code}/92618?size=5", {
-        "method": "GET",
-        "headers": {
-            "x-api-key": "481cdd6ceda2a590c083bb3daddbd066",
-            "x-rapidapi-key": "edad40ff31msh277b41d1a9321c3p120a05jsnf0693eb77a08",
-            "x-rapidapi-host": "documenu.p.rapidapi.com"
-        }
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data)
-    })
-    .catch(err => {
-        console.error(err);
-    });
+            fetch("https://api.documenu.com/v2/restaurants/zip_code/92618?size=5", {
+                "method": "GET",
+                "headers": {
+                    "x-api-key": "481cdd6ceda2a590c083bb3daddbd066",
+                    "x-rapidapi-key": "edad40ff31msh277b41d1a9321c3p120a05jsnf0693eb77a08",
+                    "x-rapidapi-host": "documenu.p.rapidapi.com"
+                }
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.error(err);
+                });
 }
 
 restaurant()
@@ -246,12 +243,12 @@ function generateCardTemplateResturant(restaurant) {
                 <div class="card-content">
                     <div class="media">
                         <div class="media-content">
-                            <p class="title is-4">${restaurant_name}</p>
-                            <p class="subtitle is-6"> ${restaurant_phone}</p>
+                            <p class="title is-4">${restaurant_name || "What's up!"}</p>
+                            <p class="subtitle is-6"> ${restaurant_phone || "What's up!"}</p>
                         </div>
                     </div>
                     <div class="content">
-                        <p id='recipe-detail-1'>${restaurant_website}</p>
+                        <p id='recipe-detail-1'>${restaurant_website || "What's up!"}</p>
                     </div>
                 </div>
             </div>
@@ -291,7 +288,7 @@ document.querySelectorAll('.restaurants').forEach(function (restaurant) {
             console.log(response);
             response.results.map(restaurant => {
                 let card = generateCardTemplateResturant(restaurant)
-                document.getElementById("recipe-page").append(card)
+                document.getElementById("restaurant-page").append(card)
             })
         })
     })
