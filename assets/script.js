@@ -242,7 +242,7 @@ window.addEventListener("load", function () {
 
 
     function generateRestCard(restaurant) {
-        const { restaurant_name, restaurant_phone, restaurant_website, price_range } = restaurant
+        const { restaurant_name, restaurant_phone, address, price_range } = restaurant
 
 
         let html = `
@@ -257,7 +257,7 @@ window.addEventListener("load", function () {
                         </div>
                     </div>
                     <div class="content">
-                        <p id='recipe-detail-1'>${restaurant_website}</p>
+                        <p id='recipe-detail-1'>${address}</p>
                     </div>
                 </div>
             </div>
@@ -271,12 +271,12 @@ window.addEventListener("load", function () {
         return template.content.firstChild;
     }
 
-    // function clearRestaurantList() {
-    //     let parent = document.getElementById("restaurant-page")
-    //     while (parent.firstChild) {
-    //         parent.removeChild(parent.firstChild)
-    //     }
-    // }
+    function clearRestaurantList() {
+        let parent = document.getElementById("recipe-page")
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild)
+        }
+    }
 
 
 
@@ -313,7 +313,7 @@ window.addEventListener("load", function () {
             // }
             // city = zip_code
             // // before we generate html lets us empty the apge 
-            // clearRestaurantList()
+            clearRestaurantList()
 
             getRestaurant(zip).then(function (response) {
                 console.log(response);
