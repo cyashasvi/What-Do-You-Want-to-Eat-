@@ -1,185 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-    rel="stylesheet"/>
-    <link rel = "stylesheet" href = "assets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/style.css">
     <title>What Do You Want to Eat</title>
 </head>
-<body>
-  <header>
 
-    <nav 
-      class="navbar is-transparent has-shadow">
-     <div class="navbar-brand">
-      <!-- <a class="navbar-item" href="https://bulma.io">
+<body>
+    <header>
+
+        <nav class="navbar is-transparent has-shadow">
+            <div class="navbar-brand">
+                <!-- <a class="navbar-item" href="https://bulma.io">
         <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
       </a>  -->
-      <div class="navbar-burger" data-target="navbarExampleTransparentExample">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  
-      <div id="navbarExampleTransparentExample" class="navbar-menu">
-       <div class="navbar-start">
-         <a id = "change-to-dine-in" class="navbar-item" href="#">
-          DINE IN 
-         </a>
-         <a id = "change-to-dine-out" class="navbar-item" href="#">
-            DINE OUT
-         </a>
-         <a id = "recipe-page-btn" class="navbar-item" href="#">
-            RECIPES
-          </a>
-          <a class="navbar-item" href="#">
-            RESTURANTS
-          </a>
+                <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div id="navbarExampleTransparentExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a id="change-to-dine-in" class="navbar-item" href="#">
+                        DINE IN
+                    </a>
+                    <a id="change-to-dine-out" class="navbar-item" href="#">
+                        DINE OUT
+                    </a>
+                    <a id="recipe-page-btn" class="navbar-item" href="#">
+                        RECIPES
+                    </a>
+                    <a class="navbar-item" href="#">
+                        RESTURANTS
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Eddie - Do we want this to always show or do we only want it visiable when recipes/resturants is selected? -->
+        <!-- Here is the food type navbar start point -->
+        <div class="tabs is-centered hide" id="foodTypes">
+            <ul>
+                <li><a class="recipes" id="american">American</a></li>
+                <li><a class="recipes" id="chinese">Asian</a></li>
+                <li><a class="recipes" id="greek">Greek</a></li>
+                <li><a class="recipes" id="indian">Indian</a></li>
+                <li><a class="recipes" id="italian">Italian</a></li>
+                <li><a class="recipes" id="mexican">Mexican</a></li>
+            </ul>
         </div>
-      </div>
-    </nav>
 
-    <!-- Eddie - Do we want this to always show or do we only want it visiable when recipes/resturants is selected? -->
-<!-- Here is the food type navbar start point -->
-    <div class="tabs is-centered" id="foodTypes">
-      <ul>
-        <li><a id="all">All</a></li>
-        <li><a id="american">American</a></li>
-        <li><a id="chinese">Chinese</a></li>
-        <li><a id="european">European</a></li>
-        <li><a id="greek">Greek</a></li>
-        <li><a id="indian">Indian</a></li>
-        <li><a id="italian">Italian</a></li>
-        <li><a id="japanese">Japanese</a></li>
-        <li><a id="korean">Korean</a></li>
-        <li><a id="mediterranean">Mediterranean</a></li>
-        <li><a id="mexican">Mexican</a></li>
-      </ul>
-    </div>
+    </header>
 
-  </header>
+    <section id="dine-in-out">
+        <!-- Add in the the dine-in-out id to so I can hid this section at will  -->
+        <div class="card p-6 m-6" style="background-color: rgba(255, 255,255, 0.9 ) !important;">
 
-<section id="dine-in-out">  <!-- Add in the the dine-in-out id to so I can hid this section at will  -->
-    <div class="card p-6 m-6" style="background-color: rgba(255, 255,255, 0.9 ) !important;">
-
-      <div class="card-content">
-        <div class="content">
-          Hungry are you? Well you can solve that by telling us how you will be dining today.
-          <!-- <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a> Eddie - Do we need this? 
+            <div class="card-content">
+                <div class="content">
+                    Hungry are you? Well you can solve that by telling us how you will be dining today.
+                    <!-- <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a> Eddie - Do we need this? 
           <br>
           <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>  -->
-        </div>
-      </div>
-      
-      <footer class="card-footer" id="showModal">
-        <button id= "dine-in" class = "card-footer-item">Dine-In</button>
-        <button id = "dine-out" class = "card-footer-item">Dine-Out</button>
-      </footer>
-</section>
-
-<!-- Here is the modal start point -->
-    <div class="modal">
-      <div class="modal-background"></div>
-        <div class="modal-card">
-          <h1 class="modal-card-head">
-            <p class="modal-card-title" id="survey-title">Modal title</p>
-              <button class="delete" aria-label="close"></button>
-          </h1>
-          <h2 class="modal-card-body"> Do you like spicy food?
-           <div class="control">
-              <label class="radio">
-                <input type="radio" name="answer">
-                Yes
-              </label>
-              <label class="radio">
-                <input type="radio" name="answer">
-                No
-              </label>
+                </div>
             </div>
-          </h2>
+
+            <footer class="card-footer" id="showModal">
+                <button id="dine-in" class="card-footer-item">Dine-In</button>
+                <button id="dine-out" class="card-footer-item">Dine-Out</button>
+            </footer>
+    </section>
+
+    <!-- Here is the modal start point -->
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <h1 class="modal-card-head">
+                <p class="modal-card-title" id="survey-title">Modal title</p>
+                <button class="delete" aria-label="close"></button>
+            </h1>
+            <h2 class="modal-card-body"> Do you like spicy food?
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="answer">
+                        Yes
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="answer">
+                        No
+                    </label>
+                </div>
+            </h2>
             <footer class="modal-card-foot">
-             <button id= "save-btn" class="button is-success">Save changes</button>
-             <button id= "cancel-btn"class="button">Cancel</button>
+                <button id="save-btn" class="button is-success">Save changes</button>
+                <button id="cancel-btn" class="button">Cancel</button>
             </footer>
         </div>
-      </div>
     </div>
-    
-<!-- Here is the recipe page start point -->
-<section id = "recipe-page" class = "hide">
-    <div class="container "> 
-      <div class="columns is-vcentered">
-          <div class="card column is-3">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-4">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
-      
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                <a href="#">#css</a> <a href="#">#responsive</a>
-                <br>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-              </div>
-            </div>
-          </div>
-      
-          <div class="card column is-3">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img src="https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/309632.jpg" alt="Placeholder image">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-4">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
-      
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                <a href="#">#css</a> <a href="#">#responsive</a>
-                <br>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-              </div>
-            </div>
-          </div>
     </div>
 
-  </section>
-
+    <!-- Here is the recipe page start point -->
+    <section id="recipe-page" class="hide is-flex is-flex-wrap-wrap">
+        <!-- <div class="container "> -->
+            <!-- <div class="columns is-vcentered">
+                <div class="card column is-3">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="#" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">title</p>
+                                <p class="subtitle is-6">prep-time + total</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p id='recipe-detail-1'>recipe detail</p>
+                            <br>
+                            <footer class="card-footer">
+                                <button id="view-recipe" class="button">View Recipe</button>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <!-- </div> -->
+    </section>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="./assets/script.js"></script>
+
 </html>
 
 <!-- Old code removed for switching to different HTML page -->
@@ -190,7 +150,7 @@
 </footer> -->
 
 <!-- Are we using this code? -->
-      <!-- <header class="card-header">
+<!-- <header class="card-header">
         <p class="card-header-title">
           Component
         </p>
