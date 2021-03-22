@@ -5,6 +5,7 @@ window.addEventListener("load", function () {
 
     // ideally this should be a global vairable 
     var cuisine = null
+    var city = null
 
     var dineInBtn = document.getElementById('dine-in')
     var dineOutBtn = document.getElementById('dine-out')
@@ -57,28 +58,32 @@ window.addEventListener("load", function () {
         cardContent.classList.add('hide')
         recipePage.classList.remove('hide')
         foodTypes.classList.remove('hide')
+        resturantPage.classList.add('hide')
         document.getElementById('american').click()
+        clearRecipleList()
     }
 
     function showResturantPage() {
-            cardContent.classList.add('hide')
-            recipePage.classList.add('hide')
-            foodTypes.classList.add('hide')
-            resturantPage.classList.remove('hide')
+        cardContent.classList.add('hide')
+        recipePage.classList.add('hide')
+        foodTypes.classList.add('hide')
+        resturantPage.classList.remove('hide')
+        document.getElementById('92806').click()
+        clearRecipleList()
     }
 
-        //     document.querySelectorAll('american').forEach(function (recipe) {
-        //         recipe.addEventListener("click", function (e) {
-        //             e.preventDefault()
-        //             let list = e.target.id
-        //             getRecipesByList(list).then(function (response) {
-        //                 response.results.map(recipe => {
-        //                     let card = generateCardTemplate(recipe)
-        //                     document.getElementById("recipe-page").append(card)
-        //                 })
-        //             })
-        //         })
-        //     })
+    //     document.querySelectorAll('american').forEach(function (recipe) {
+    //         recipe.addEventListener("click", function (e) {
+    //             e.preventDefault()
+    //             let list = e.target.id
+    //             getRecipesByList(list).then(function (response) {
+    //                 response.results.map(recipe => {
+    //                     let card = generateCardTemplate(recipe)
+    //                     document.getElementById("recipe-page").append(card)
+    //                 })
+    //             })
+    //         })
+    //     })
 
 
 
@@ -138,7 +143,7 @@ window.addEventListener("load", function () {
 
     function generateCardTemplate(recipe) {
         const { thumbnail_url, name, cook_time_minutes, description, original_video_url } = recipe
-        
+
 
         let html = `
             
@@ -206,38 +211,48 @@ window.addEventListener("load", function () {
         })
     })
 
-function restaurant(list) {
-    fetch("https://api.documenu.com/v2/restaurants/zip_code/92618?size=5", {
-        "method": "GET",
-        "headers": {
-            "x-api-key": "481cdd6ceda2a590c083bb3daddbd066",
-            "x-rapidapi-key": "edad40ff31msh277b41d1a9321c3p120a05jsnf0693eb77a08",
-            "x-rapidapi-host": "documenu.p.rapidapi.com"
-        }
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data)
-    })
-    .catch(err => {
-        console.error(err);
-    });
-}
-restaurant();
+    function getRestaurant(zip) {
+        return new Promise(resolve => {
+            fetch(`https://api.documenu.com/v2/restaurants/zip_code/${zip}/?size=6`, {
+                "method": "GET",
+                "headers": {
+                    "x-api-key": "481cdd6ceda2a590c083bb3daddbd066",
+                    "x-rapidapi-key": "edad40ff31msh277b41d1a9321c3p120a05jsnf0693eb77a08",
+                    "x-rapidapi-host": "documenu.p.rapidapi.com"
+                }
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (response) {
+                    // console.log(data)
+                    // return data.data;
+                    return resolve(response);
+                    // data.data.forEach(restaurant => {
+                    //     generateRestCard(restaurant);
+                    // })
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        })
 
-function generateCardTemplate(restaurant) {
-    const { restaurant_name, restaurant_phone, restaurant_website } = restaurant
-    
+    }
 
-    let html = `
+
+
+    function generateRestCard(restaurant) {
+        const { restaurant_name, restaurant_phone, restaurant_website, price_range } = restaurant
+
+
+        let html = `
         
             <div class="card mx-4">
                 <div class="card-content">
                     <div class="media">
                         <div class="media-content">
                             <p class="title is-4">${restaurant_name}</p>
+                            <p class="subtitle is-6"> ${price_range || "$"}</p>
                             <p class="subtitle is-6"> ${restaurant_phone}</p>
                         </div>
                     </div>
@@ -250,43 +265,66 @@ function generateCardTemplate(restaurant) {
     
 `
 
-    var template = document.createElement('template');
-    html = html.trim(); // Never return a text node of whitespace as the result
-    template.innerHTML = html;
-    return template.content.firstChild;
-}
-
-function clearRestaurantList() {
-    let parent = document.getElementById("restaurant-page")
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild)
+        var template = document.createElement('template');
+        html = html.trim(); // Never return a text node of whitespace as the result
+        template.innerHTML = html;
+        return template.content.firstChild;
     }
-}
+
+    // function clearRestaurantList() {
+    //     let parent = document.getElementById("restaurant-page")
+    //     while (parent.firstChild) {
+    //         parent.removeChild(parent.firstChild)
+    //     }
+    // }
 
 
 
-document.querySelectorAll('.restaurants').forEach(function (restaurant) {
+    document.querySelectorAll('.restaurants').forEach(restaurant => {
+        restaurant.addEventListener("click", e => {
+            e.preventDefault()
+            console.log(e.target.id)
 
-    restaurant.addEventListener("click", function (e) {
+            let zip = e.target.id;
+            // let zip;
 
-        e.preventDefault()
-        let list = e.target.id
-        if (address.city == list) {
-            return
-        }
-        address.city = list
-        // before we generate html lets us empty the apge 
-        clearRestaurantList()
+            // let list = e.target.id
+            if (city == zip) {
+                return
+            }
+            city = zip
+            console.log(city);
+            // switch (city) {
 
-        restaurant(list).then(function (response) {
-            console.log(response);
-            response.results.map(restaurant => {
-                let card = generateCardTemplate(restaurant)
-                document.getElementById("restaurant-page").append(card)
+            //     case "irvine":
+            //         zip = "92602";
+            //         break;
+                // case "anaheim":
+                //     zip = "92801";
+                //     break;
+
+                // default:
+                //     zip = "92806";
+                //     break;
+            // })
+            // let list = e.target.id
+            // if (city == zip_code) {
+            //     return
+            // }
+            // city = zip_code
+            // // before we generate html lets us empty the apge 
+            // clearRestaurantList()
+
+            getRestaurant(zip).then(function (response) {
+                console.log(response);
+                response.data.map(restaurant => {
+                    console.log(restaurant)
+                    let card = generateRestCard(restaurant)
+                    document.getElementById("recipe-page").append(card)
+                })
             })
         })
     })
-})
 
 
 
