@@ -58,16 +58,16 @@ window.addEventListener("load", function () {
         cardContent.classList.add('hide')
         recipePage.classList.remove('hide')
         foodTypes.classList.remove('hide')
-        resturantPage.classList.add('hide')
+        restaurantPage.classList.add('hide')
         document.getElementById('american').click()
         clearRecipleList()
     }
 
-    function showResturantPage() {
+    function showRestaurantPage() {
         cardContent.classList.add('hide')
         recipePage.classList.add('hide')
         foodTypes.classList.add('hide')
-        resturantPage.classList.remove('hide')
+        restaurantPage.classList.remove('hide')
         document.getElementById('92806').click()
         clearRecipleList()
     }
@@ -237,6 +237,7 @@ window.addEventListener("load", function () {
                 });
         })
 
+
     }
 
 
@@ -257,7 +258,9 @@ window.addEventListener("load", function () {
                         </div>
                     </div>
                     <div class="content">
+
                         <p id='recipe-detail-1'>${address}</p>
+
                     </div>
                 </div>
             </div>
@@ -321,7 +324,7 @@ window.addEventListener("load", function () {
                     console.log(restaurant)
                     let card = generateRestCard(restaurant)
                     document.getElementById("recipe-page").append(card)
-                })
+                })     
             })
         })
     })
@@ -372,3 +375,4 @@ window.addEventListener("load", function () {
     //  document.getElementById('italian').addEventListener('click', italianGroup);
 
 })
+
