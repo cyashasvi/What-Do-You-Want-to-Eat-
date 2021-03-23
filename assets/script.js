@@ -18,9 +18,9 @@ window.addEventListener("load", function () {
     var recipePage = document.getElementById('recipe-page')
     var recipePageBtn = document.getElementById('recipe-page-btn')
     var foodTypes = document.getElementById('foodTypes')
-    var resturantPage = document.getElementById('resturant-page')
-    var resturantPageBtn = document.getElementById('resturant-page-btn')
-
+    var restaurantPage = document.getElementById('restaurant-page')
+    var resturantPageBtn = document.getElementById('restaurant-page-btn')
+   
 
     dineInBtn.addEventListener('click', startSurveyIn)
     dineOutBtn.addEventListener('click', startSurveyOut)
@@ -29,13 +29,14 @@ window.addEventListener("load", function () {
     changeToDineIn.addEventListener('click', startSurveyIn)
     changeToDineOut.addEventListener('click', startSurveyOut)
     recipePageBtn.addEventListener('click', showRecipePage)
-    resturantPageBtn.addEventListener('click', showResturantPage)
+    resturantPageBtn.addEventListener('click', showRestaurantPage)
 
     function startSurveyIn() {
         cardContent.classList.add('hide')
         $('.modal').addClass('is-active')
         surveyTitle.innerHTML = "Dining in is a great choice!"
         recipePage.classList.add('hide')
+        clearRecipleList()
     }
 
     function startSurveyOut() {
@@ -43,6 +44,7 @@ window.addEventListener("load", function () {
         $('.modal').addClass('is-active')
         surveyTitle.innerHTML = "Dining out looks like you wont have dishes to do!";
         recipePage.classList.add('hide')
+        clearRecipleList()
     }
 
     function cancelSurvey() {
@@ -243,8 +245,8 @@ window.addEventListener("load", function () {
 
 
     function generateRestCard(restaurant) {
-        const { restaurant_name, restaurant_phone, address, price_range } = restaurant
-
+        const { restaurant_name, restaurant_phone, price_range } = restaurant
+       
 
         let html = `
         
@@ -258,8 +260,6 @@ window.addEventListener("load", function () {
                         </div>
                     </div>
                     <div class="content">
-
-                        <p id='recipe-detail-1'>${address}</p>
 
                     </div>
                 </div>
