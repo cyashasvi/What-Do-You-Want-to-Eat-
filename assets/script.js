@@ -47,7 +47,7 @@ window.addEventListener("load", function () {
         surveyTitle2.innerHTML = "Dining out looks like you wont have dishes to do!"
         recipePage.classList.add('hide')
         clearRecipleList()
-        document.getElementById('92618').click()
+       
     }
 
     function cancelSurvey() {
@@ -67,6 +67,7 @@ window.addEventListener("load", function () {
         var irvineChoice = document.querySelector('input[name = "irvine"]:checked').value
         console.log(irvineChoice)
         $(".modal").removeClass('is-active')
+        document.getElementById('92618').click()
         // getRandomRecipe()
     }
 
