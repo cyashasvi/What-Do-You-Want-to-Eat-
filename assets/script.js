@@ -1,9 +1,11 @@
 window.addEventListener("load", function () {
 
+    var apiKey = "FlqWwYqJzXaWUWn3V-cYinMrcKlu855-57HIftCbVrLLG5uXvoo89kw7jDbW6GhyiOhrghGq72yWbS4En9ZTDWnBzqct_d6PLFhI9Jp_U4xTrFAF3vFdd43hobRSYHYx";
+    var yelpID = "ILScKjvBUWM78H9UUR3uxA"
+
     // ideally this should be a global vairable 
     var cuisine = null
     var city = null
-
 
     var dineInBtn = document.getElementById('dine-in')
     var dineOutBtn = document.getElementById('dine-out')
@@ -16,8 +18,8 @@ window.addEventListener("load", function () {
     var recipePage = document.getElementById('recipe-page')
     var recipePageBtn = document.getElementById('recipe-page-btn')
     var foodTypes = document.getElementById('foodTypes')
-    var restaurantPage = document.getElementById('restaurant-page')
-    var restaurantPageBtn = document.getElementById('restaurant-page-btn')
+    var resturantPage = document.getElementById('resturant-page')
+    var resturantPageBtn = document.getElementById('resturant-page-btn')
 
 
     dineInBtn.addEventListener('click', startSurveyIn)
@@ -27,14 +29,13 @@ window.addEventListener("load", function () {
     changeToDineIn.addEventListener('click', startSurveyIn)
     changeToDineOut.addEventListener('click', startSurveyOut)
     recipePageBtn.addEventListener('click', showRecipePage)
-    restaurantPageBtn.addEventListener('click', showRestaurantPage)
+    resturantPageBtn.addEventListener('click', showResturantPage)
 
     function startSurveyIn() {
         cardContent.classList.add('hide')
         $('.modal').addClass('is-active')
         surveyTitle.innerHTML = "Dining in is a great choice!"
         recipePage.classList.add('hide')
-        clearRecipleList();
     }
 
     function startSurveyOut() {
@@ -42,7 +43,6 @@ window.addEventListener("load", function () {
         $('.modal').addClass('is-active')
         surveyTitle.innerHTML = "Dining out looks like you wont have dishes to do!";
         recipePage.classList.add('hide')
-        clearRecipleList();
     }
 
     function cancelSurvey() {
@@ -71,8 +71,6 @@ window.addEventListener("load", function () {
         document.getElementById('92806').click()
         clearRecipleList()
     }
-
-        
 
     //     document.querySelectorAll('american').forEach(function (recipe) {
     //         recipe.addEventListener("click", function (e) {
@@ -107,42 +105,41 @@ window.addEventListener("load", function () {
         })
     }
 
-    // function getRecipeDetail(recipe_id) {
-    //     return new Promise((resolve) => {
-    //         fetch(`https://tasty.p.rapidapi.com/recipes/detail?id=${recipe_id}`, {
-    //             "method": "GET",
-    //             "headers": {
-    //                 "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
-    //                 "x-rapidapi-host": "tasty.p.rapidapi.com"
-    //             }
-    //         })
-    //             .then(response => response.json())
-    //             .then(response => resolve(response))
-    //             .catch(err => {
-    //                 console.error(err);
-    //             });
-    //     })
-    // }
+    function getRecipeDetail(recipe_id) {
+        return new Promise((resolve) => {
+            fetch(`https://tasty.p.rapidapi.com/recipes/detail?id=${recipie_id}`, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
+                    "x-rapidapi-host": "tasty.p.rapidapi.com"
+                }
+            })
+                .then(response => response.json())
+                .then(response => resolve(response))
+                .catch(err => {
+                    console.error(err);
+                });
+        })
+    }
 
-    // function getLists() {
-    //     return new Promise((resolve) => {
-    //         fetch("https://tasty.p.rapidapi.com/tags/list", {
-    //             "method": "GET",
-    //             "headers": {
-    //                 "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
-    //                 "x-rapidapi-host": "tasty.p.rapidapi.com"
-    //             }
-    //         })
-    //             .then(response => response.json())
-    //             .then(response => {
-    //                 resolve(response)
-    //             })
-    //             .catch(err => {
-    //                 console.error(err);
-    //             });
-    //     })
-    // }
-
+    function getLists() {
+        return new Promise((resolve) => {
+            fetch("https://tasty.p.rapidapi.com/tags/list", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
+                    "x-rapidapi-host": "tasty.p.rapidapi.com"
+                }
+            })
+                .then(response => response.json())
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        })
+    }
 
     function generateCardTemplate(recipe) {
         const { thumbnail_url, name, cook_time_minutes, description, original_video_url } = recipe
@@ -183,7 +180,7 @@ window.addEventListener("load", function () {
     }
 
     function clearRecipleList() {
-        let parent = document.getElementById('recipe-page')
+        let parent = document.getElementById("recipe-page")
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild)
         }
@@ -214,7 +211,6 @@ window.addEventListener("load", function () {
         })
     })
 
-
     function getRestaurant(zip) {
         return new Promise(resolve => {
             fetch(`https://api.documenu.com/v2/restaurants/zip_code/${zip}/?size=6`, {
@@ -228,7 +224,6 @@ window.addEventListener("load", function () {
                 .then(function (response) {
                     return response.json();
                 })
-
                 .then(function (response) {
                     // console.log(data)
                     // return data.data;
@@ -236,19 +231,19 @@ window.addEventListener("load", function () {
                     // data.data.forEach(restaurant => {
                     //     generateRestCard(restaurant);
                     // })
-
                 })
                 .catch(err => {
                     console.error(err);
                 });
-
         })
 
-}
+
+    }
+
 
 
     function generateRestCard(restaurant) {
-        const { restaurant_name, restaurant_phone, restaurant_website, price_range } = restaurant
+        const { restaurant_name, restaurant_phone, address, price_range } = restaurant
 
 
         let html = `
@@ -263,7 +258,9 @@ window.addEventListener("load", function () {
                         </div>
                     </div>
                     <div class="content">
-                        <p id='recipe-detail-1'>${restaurant_website}</p>
+
+                        <p id='recipe-detail-1'>${address}</p>
+
                     </div>
                 </div>
             </div>
@@ -277,12 +274,12 @@ window.addEventListener("load", function () {
         return template.content.firstChild;
     }
 
-    // function clearRestaurantList() {
-    //     let parent = document.getElementById("restaurant-page")
-    //     while (parent.firstChild) {
-    //         parent.removeChild(parent.firstChild)
-    //     }
-    // }
+    function clearRestaurantList() {
+        let parent = document.getElementById("recipe-page")
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild)
+        }
+    }
 
 
 
@@ -290,7 +287,6 @@ window.addEventListener("load", function () {
         restaurant.addEventListener("click", e => {
             e.preventDefault()
             console.log(e.target.id)
-
 
             let zip = e.target.id;
             // let zip;
@@ -320,7 +316,7 @@ window.addEventListener("load", function () {
             // }
             // city = zip_code
             // // before we generate html lets us empty the apge 
-            // clearRestaurantList()
+            clearRestaurantList()
 
             getRestaurant(zip).then(function (response) {
                 console.log(response);
@@ -328,21 +324,10 @@ window.addEventListener("load", function () {
                     console.log(restaurant)
                     let card = generateRestCard(restaurant)
                     document.getElementById("recipe-page").append(card)
-                })
-
-        e.preventDefault()
-        let list = e.target.id
-        if (address == list) {
-            return
-        }
-        address = list
-        // before we generate html lets us empty the page 
-        restaurantPage()
+                })     
             })
         })
     })
-
-
 
 
 
@@ -389,4 +374,5 @@ window.addEventListener("load", function () {
 
     //  document.getElementById('italian').addEventListener('click', italianGroup);
 
- })
+})
+
