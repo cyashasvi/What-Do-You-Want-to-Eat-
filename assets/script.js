@@ -1,7 +1,5 @@
 window.addEventListener("load", function () {
 
-    var apiKey = "FlqWwYqJzXaWUWn3V-cYinMrcKlu855-57HIftCbVrLLG5uXvoo89kw7jDbW6GhyiOhrghGq72yWbS4En9ZTDWnBzqct_d6PLFhI9Jp_U4xTrFAF3vFdd43hobRSYHYx";
-    var yelpID = "ILScKjvBUWM78H9UUR3uxA"
 
     // ideally this should be a global vairable 
     var cuisine = null
@@ -9,23 +7,27 @@ window.addEventListener("load", function () {
 
     var dineInBtn = document.getElementById('dine-in')
     var dineOutBtn = document.getElementById('dine-out')
-    var saveBtn = document.getElementById('save-btn')
-    var cancelBtn = document.getElementById('cancel-btn')
+    var saveBtn1 = document.getElementById('save-btn1')
+    var cancelBtn1 = document.getElementById('cancel-btn1')
+    var saveBtn2 = document.getElementById('save-btn2')
+    var cancelBtn2 = document.getElementById('cancel-btn2')
     var changeToDineIn = document.getElementById('change-to-dine-in')
     var changeToDineOut = document.getElementById('change-to-dine-out')
     var cardContent = document.getElementById('dine-in-out')
     var surveyTitle = document.getElementById('survey-title')
+    var surveyTitle2 = document.getElementById('survey-title2')
     var recipePage = document.getElementById('recipe-page')
     var recipePageBtn = document.getElementById('recipe-page-btn')
     var foodTypes = document.getElementById('foodTypes')
     var restaurantPage = document.getElementById('restaurant-page')
     var resturantPageBtn = document.getElementById('restaurant-page-btn')
-   
 
     dineInBtn.addEventListener('click', startSurveyIn)
     dineOutBtn.addEventListener('click', startSurveyOut)
-    saveBtn.addEventListener('click', saveSurvey)
-    cancelBtn.addEventListener('click', cancelSurvey)
+    saveBtn1.addEventListener('click', saveDineInSurvey)
+    saveBtn2.addEventListener('click', saveDineOutSurvey)
+    cancelBtn1.addEventListener('click', cancelSurvey)
+    cancelBtn2.addEventListener('click', cancelSurvey)
     changeToDineIn.addEventListener('click', startSurveyIn)
     changeToDineOut.addEventListener('click', startSurveyOut)
     recipePageBtn.addEventListener('click', showRecipePage)
@@ -33,7 +35,7 @@ window.addEventListener("load", function () {
 
     function startSurveyIn() {
         cardContent.classList.add('hide')
-        $('.modal').addClass('is-active')
+        $('.modal1').addClass('is-active')
         surveyTitle.innerHTML = "Dining in is a great choice!"
         recipePage.classList.add('hide')
         clearRecipleList()
@@ -41,10 +43,11 @@ window.addEventListener("load", function () {
 
     function startSurveyOut() {
         cardContent.classList.add('hide')
-        $('.modal').addClass('is-active')
-        surveyTitle.innerHTML = "Dining out looks like you wont have dishes to do!";
+        $('.modal2').addClass('is-active')
+        surveyTitle2.innerHTML = "Dining out looks like you wont have dishes to do!"
         recipePage.classList.add('hide')
         clearRecipleList()
+        document.getElementById('92618').click()
     }
 
     function cancelSurvey() {
@@ -52,9 +55,29 @@ window.addEventListener("load", function () {
         $(".modal").removeClass('is-active')
     }
 
-    function saveSurvey() {
+    function saveDineInSurvey() {
+        var americanChoice = document.querySelector('input[name = "american"]:checked').value
+        console.log(americanChoice)
         $(".modal").removeClass('is-active')
+        document.getElementById('american').click()
+        // getRandomRecipe()
     }
+
+    function saveDineOutSurvey() {
+        var irvineChoice = document.querySelector('input[name = "irvine"]:checked').value
+        console.log(irvineChoice)
+        $(".modal").removeClass('is-active')
+        // getRandomRecipe()
+    }
+
+//      function getRandomRecipe() {
+//        console.log(americanChoice)
+//        var possibleRecipes = []
+//        var results = []
+//          for (var i = 0; i < recipeCards; i++) {
+//              var ranRecipe = possibleRecipes[Math.floor(Math.random() * possibleRecipes.length)]
+//              results.push(ranRecipe)
+//  }}
 
     function showRecipePage() {
         cardContent.classList.add('hide')
@@ -89,6 +112,7 @@ window.addEventListener("load", function () {
 
 
 
+
     function getRecipesByList(list) {
         return new Promise((resolve) => {
             fetch(`https://tasty.p.rapidapi.com/recipes/list?from=0&size=6&tags=${list}`, {
@@ -107,41 +131,7 @@ window.addEventListener("load", function () {
         })
     }
 
-    function getRecipeDetail(recipe_id) {
-        return new Promise((resolve) => {
-            fetch(`https://tasty.p.rapidapi.com/recipes/detail?id=${recipie_id}`, {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
-                    "x-rapidapi-host": "tasty.p.rapidapi.com"
-                }
-            })
-                .then(response => response.json())
-                .then(response => resolve(response))
-                .catch(err => {
-                    console.error(err);
-                });
-        })
-    }
-
-    function getLists() {
-        return new Promise((resolve) => {
-            fetch("https://tasty.p.rapidapi.com/tags/list", {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-key": "a97a5ed35cmsh52502addb79796dp140b16jsne4d7db9c6ef8",
-                    "x-rapidapi-host": "tasty.p.rapidapi.com"
-                }
-            })
-                .then(response => response.json())
-                .then(response => {
-                    resolve(response)
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-        })
-    }
+   
 
     function generateCardTemplate(recipe) {
         const { thumbnail_url, name, cook_time_minutes, description, original_video_url } = recipe
@@ -241,11 +231,10 @@ window.addEventListener("load", function () {
 
 
     }
-
-
+    
 
     function generateRestCard(restaurant) {
-        const { restaurant_name, restaurant_phone, price_range } = restaurant
+        const { restaurant_name, restaurant_phone, price_range, address } = restaurant
        
 
         let html = `
@@ -257,6 +246,7 @@ window.addEventListener("load", function () {
                             <p class="title is-4">${restaurant_name}</p>
                             <p class="subtitle is-6"> ${price_range || "$"}</p>
                             <p class="subtitle is-6"> ${restaurant_phone}</p>
+                            <p class="subtitle is-6"> ${address.formatted || "N/A"}</p>
                         </div>
                     </div>
                     <div class="content">

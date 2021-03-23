@@ -61,7 +61,7 @@
             <ul>
 
                 <li><a class="restaurants" id="92806">Anaheim</a></li>
-                <li><a class="restaurants" id="92881">Corona</a></li>
+                <li><a class="restaurants" id="90621">Fullerton</a></li>
                 <li><a class="restaurants" id="92648">Huntington Beach</a></li>
                 <li><a class="restaurants" id="92618">Irvine</a></li>
                 <li><a class="restaurants" id="92651">Laguna Beach</a></li>
@@ -92,28 +92,85 @@
     </section>
 
     <!-- Here is the modal start point -->
-    <div class="modal">
+    <div id = card1 class="modal modal1">
         <div class="modal-background"></div>
         <div class="modal-card">
             <h1 class="modal-card-head">
                 <p class="modal-card-title" id="survey-title">Modal title</p>
                 <button class="delete" aria-label="close"></button>
             </h1>
-            <h2 class="modal-card-body"> Do you like spicy food?
+            <h2 class="modal-card-body">What type of food cuisine are you looking for?
                 <div class="control">
                     <label class="radio">
-                        <input type="radio" name="answer">
-                        Yes
+                        <input id = "american" value = "american" type="radio" name="american">
+                        American
                     </label>
                     <label class="radio">
-                        <input type="radio" name="answer">
-                        No
+                        <input id = "asian" value = "asian" type="radio" name="asian">
+                        Asian
+                    </label>
+                    <label class="radio">
+                        <input id = "greek" value = "greek" type="radio" name="greek">
+                        Greek
+                    </label>
+                    <label class="radio">
+                        <input id = "indian" value = "indian" type="radio" name="indian">
+                        Indian
+                    </label>
+                    <label class="radio">
+                        <input id = "italian" value = "italian" type="radio" name="italian">
+                        Italian
+                    </label>
+                    <label class="radio">
+                        <input id = "mexican" value = "mexican" type="radio" name="mexican">
+                        Mexican
                     </label>
                 </div>
             </h2>
             <footer class="modal-card-foot">
-                <button id="save-btn" class="button is-success">Save changes</button>
-                <button id="cancel-btn" class="button">Cancel</button>
+                <button id="save-btn1" class="button is-success">Save changes</button>
+                <button id="cancel-btn1" class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
+    <div id = card2 class="modal modal2">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <h1 class="modal-card-head">
+                <p class="modal-card-title" id="survey-title2">Modal title</p>
+                <button class="delete" aria-label="close"></button>
+            </h1>
+            <h2 class="modal-card-body">What city would you like to dine out at?
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="answer">
+                        Anaheim
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="answer">
+                        Fullerton
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="answer">
+                        Huntington Beach
+                    </label>
+                    <label class="radio">
+                        <input id = "irvine" value = "irvine" type="radio" name="irvine">
+                        Irvine
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="answer">
+                        Laguna Beach
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="answer">
+                        Newport Beach
+                    </label>
+                </div>
+            </h2>
+            <footer class="modal-card-foot">
+                <button id="save-btn2" class="button is-success">Save changes</button>
+                <button id="cancel-btn2" class="button">Cancel</button>
             </footer>
         </div>
     </div>
