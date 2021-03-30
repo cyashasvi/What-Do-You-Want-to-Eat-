@@ -29,7 +29,7 @@ window.addEventListener("load", function () {
     changeToDineIn.addEventListener('click', startSurveyIn)
     changeToDineOut.addEventListener('click', startSurveyOut)
     recipePageBtn.addEventListener('click', showRecipePage)
-    resturantPageBtn.addEventListener('click', showResturantPage)
+    resturantPageBtn.addEventListener('click', showRestaurantPage)
 
     function startSurveyIn() {
         cardContent.classList.add('hide')
